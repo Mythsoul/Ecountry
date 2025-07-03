@@ -72,5 +72,5 @@ storybook-static/
 
 bun.lock 
 
-/src/prisma
+*/prisma/migrations/
 
