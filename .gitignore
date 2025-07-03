@@ -1,0 +1,76 @@
+test.drawio
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+out/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js build output
+.next/
+
+# SvelteKit build output
+.svelte-kit/
+
+# Vite cache
+.vite/
+
+# Parcel cache
+.cache/
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Linux system files
+*.swp
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Storybook build outputs
+.out/
+storybook-static/
+
+# Misc
+*.tgz
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+bun.lock 
+
+/src/prisma
+
