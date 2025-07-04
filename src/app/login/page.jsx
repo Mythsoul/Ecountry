@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import toast, { Toaster } from "react-hot-toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -30,19 +31,22 @@ export default function LoginPage() {
     try {
       const response = await axios.post("/api/auth/login", formData)
       if (response.data.success) {
-        router.push("/dashboard") 
+        toast.success("Login successful! Redirecting...")
+        setTimeout(() => {
+          router.push("/dashboard")
+        }, 1000)
       }
     } catch (err) {
-      setError(err.response?.data?.error || "Login failed")
+      const errorMsg = err.response?.data?.error || "Login failed"
+      setError(errorMsg)
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }
   }
 
   const handleOAuthLogin = (provider) => {
-  
-    console.log(`Login with ${provider}`)
-    setError("OAuth login not implemented yet")
+    toast.error(`${provider} login is temporarily disabled`)
   }
 
   return (
@@ -172,6 +176,7 @@ export default function LoginPage() {
         isOpen={showForgotModal} 
         onClose={() => setShowForgotModal(false)} 
       />
+      <Toaster position="top-right" />
     </div>
   )
 }

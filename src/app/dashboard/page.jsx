@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { LogOut, User } from "lucide-react"
-import axios from "axios"
+
+import api from "@/helpers/api"
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null)
@@ -13,10 +14,9 @@ export default function DashboardPage() {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user is authenticated
     const checkAuth = async () => {
       try {
-        const response = await axios.get("/api/auth/verify-token")
+        const response = await api.get("/api/auth/verify-token")
         if (response.data.success) {
           setUser(response.data.user)
         } else {
@@ -34,7 +34,7 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/auth/logout")
+      await api.post("/api/auth/logout")
       router.push("/login")
     } catch (error) {
       console.error("Logout failed:", error)

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import toast, { Toaster } from "react-hot-toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -31,7 +32,9 @@ export default function SignupPage() {
     setLoading(true)
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match")
+      const errorMsg = "Passwords do not match"
+      setError(errorMsg)
+      toast.error(errorMsg)
       setLoading(false)
       return
     }
@@ -50,14 +53,17 @@ export default function SignupPage() {
       })
 
       if (response.data.success) {
-        setSuccess("Account created successfully! Please check your email for verification.")
-        // Optionally redirect to login after a delay
+        const successMsg = "Account created successfully! Please check your email for verification."
+        setSuccess(successMsg)
+        toast.success(successMsg)
         setTimeout(() => {
           router.push("/login")
         }, 2000)
       }
     } catch (err) {
-      setError(err.response?.data?.error || "Signup failed")
+      const errorMsg = err.response?.data?.error || "Signup failed"
+      setError(errorMsg)
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -65,7 +71,7 @@ export default function SignupPage() {
 
   const handleOAuthSignup = (provider) => {
     console.log(`Signup with ${provider}`)
-    setError("OAuth signup not implemented yet")
+      toast.error(`${provider} signup is temporarily disabled`)
   }
 
   return (
@@ -221,6 +227,7 @@ export default function SignupPage() {
           </div>
         </CardContent>
       </Card>
+      <Toaster position="top-right" />
     </div>
   )
 }
